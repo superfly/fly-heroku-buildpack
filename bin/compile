@@ -20,5 +20,6 @@ curl -s https://s3.amazonaws.com/flyio-wormhole-builds/v0.5.16/pkg/wormhole_linu
 
 echo "-----> Writing .profile.d/fly.sh"
 cat <<-EOF > $BUILD_DIR/.profile.d/fly.sh
+export FLY_PORT=\$PORT
 \$HOME/bin/wormhole &
 EOF
