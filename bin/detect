@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "===> Fly backend detected."
+echo "Fly agent"
 exit 0
