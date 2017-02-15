@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# The Fly Heroku Buildpack. This script accepts parameters for a build
+# directory, a cache directory, and a directory for app environment variables.
+
+# ## Usage:
+#
+#     $ bin/compile <build-dir> <cache-dir> <env-path>
+
+# Fail fast and fail hard.
+set -eo pipefail
+
+BUILD_DIR=$1
+
+mkdir -p $BUILD_DIR/bin
+mkdir -p $BUILD_DIR/.profile.d
+
+echo "===> Installing Fly Agent"
+curl -s https://s3.amazonaws.com/flyio-wormhole-builds/v0.5.16/pkg/wormhole_linux_amd64 > $BUILD_DIR/bin/wormhole
+
+echo "===> Writing .profile.d/fly.sh"
+cat <<-EOF > $BUILD_DIR/.profile.d/fly.sh
+\$HOME/bin/wormhole &
+EOF

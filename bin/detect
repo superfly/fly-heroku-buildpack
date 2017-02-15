@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "===> Fly backend detected."
+exit 0
