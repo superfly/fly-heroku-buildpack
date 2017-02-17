@@ -19,7 +19,11 @@ echo "-----> Installing Fly Agent"
 curl -s https://s3.amazonaws.com/flyio-wormhole-builds/latest/pkg/wormhole_linux_amd64 > $BUILD_DIR/bin/wormhole
 
 echo "-----> Writing .profile.d/fly.sh"
+git_author="git log -1 --format="%an %ae""
 cat <<-EOF > $BUILD_DIR/.profile.d/fly.sh
 export FLY_PORT=\$PORT
+export FLY_RELEASE_ID=$SOURCE_VERSION
+export FLY_RELEASE_DESC=`git log -1 --format="%s"`
+export FLY_RELEASE_BRANCH=\${FLY_RELEASE_BRANCH:-master}
 \$HOME/bin/wormhole &
 EOF
