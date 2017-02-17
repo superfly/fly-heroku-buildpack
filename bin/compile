@@ -33,8 +33,19 @@ fi
 
 cat <<-EOF > $BUILD_DIR/.profile.d/fly.sh
 export FLY_PORT=\$PORT
-export FLY_RELEASE_ID=$SOURCE_VERSION
-export FLY_RELEASE_DESC="`cd $BUILD_DIR && git log -1 --format="%s"`"
+
+# use dyno metadata if enabled
+if [ -n "\$HEROKU_SLUG_COMMIT" ]; then
+  export FLY_RELEASE_ID=\$HEROKU_SLUG_COMMIT
+else
+  export FLY_RELEASE_ID=$SOURCE_VERSION
+fi
+
+# use dyno metadata if enabled
+if [ -n "\$HEROKU_SLUG_DESCRIPTION" ]; then
+  export FLY_RELEASE_ID=\$HEROKU_SLUG_DESCRIPTION
+fi
+
 export FLY_RELEASE_BRANCH=\${FLY_RELEASE_BRANCH:-master}
 \$HOME/bin/wormhole &
 EOF
