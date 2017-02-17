@@ -22,7 +22,7 @@ echo "-----> Writing .profile.d/fly.sh"
 cat <<-EOF > $BUILD_DIR/.profile.d/fly.sh
 export FLY_PORT=\$PORT
 export FLY_RELEASE_ID=$SOURCE_VERSION
-export FLY_RELEASE_DESC=`git log -1 --format="%s"`
+export FLY_RELEASE_DESC="`git log -1 --format="%s"`"
 export FLY_RELEASE_BRANCH=\${FLY_RELEASE_BRANCH:-master}
 \$HOME/bin/wormhole &
 EOF
