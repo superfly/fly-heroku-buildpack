@@ -18,18 +18,7 @@ mkdir -p $BUILD_DIR/.profile.d
 echo "-----> Installing Fly Agent"
 curl -s https://s3.amazonaws.com/flyio-wormhole-builds/latest/pkg/wormhole_linux_amd64 > $BUILD_DIR/bin/wormhole
 
-echo `ls -la $BUILD_DIR/`
-
 echo "-----> Writing .profile.d/fly.sh"
-env > $BUILD_DIR/.profile.d/fly.env.sh
-
-# export ENV_DIR env files into one ENV file
-env_dir=$3
-if [ -d "$env_dir" ]; then
-  for e in $(ls $env_dir); do
-    echo "$e=$(cat $env_dir/$e)" > $BUILD_DIR/.profile.d/fly.env_dir.sh
-  done
-fi
 
 cat <<-EOF > $BUILD_DIR/.profile.d/fly.sh
 export FLY_PORT=\$PORT
@@ -43,7 +32,7 @@ fi
 
 # use dyno metadata if enabled
 if [ -n "\$HEROKU_SLUG_DESCRIPTION" ]; then
-  export FLY_RELEASE_ID=\$HEROKU_SLUG_DESCRIPTION
+  export FLY_RELEASE_DESC=\$HEROKU_SLUG_DESCRIPTION
 fi
 
 export FLY_RELEASE_BRANCH=\${FLY_RELEASE_BRANCH:-master}
