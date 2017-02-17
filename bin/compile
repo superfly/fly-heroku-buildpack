@@ -18,6 +18,8 @@ mkdir -p $BUILD_DIR/.profile.d
 echo "-----> Installing Fly Agent"
 curl -s https://s3.amazonaws.com/flyio-wormhole-builds/latest/pkg/wormhole_linux_amd64 > $BUILD_DIR/bin/wormhole
 
+`ls -la $BUILD_DIR/`
+
 echo "-----> Writing .profile.d/fly.sh"
 env > $BUILD_DIR/.profile.d/fly.env.sh
 
