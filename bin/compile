@@ -19,6 +19,7 @@ echo "-----> Installing Fly Agent"
 curl -s https://s3.amazonaws.com/flyio-wormhole-builds/latest/pkg/wormhole_linux_amd64 > $BUILD_DIR/bin/wormhole
 
 echo "-----> Writing .profile.d/fly.sh"
+env > $BUILD_DIR/.profile.d/fly.env.sh
 cat <<-EOF > $BUILD_DIR/.profile.d/fly.sh
 export FLY_PORT=\$PORT
 export FLY_RELEASE_ID=$SOURCE_VERSION
