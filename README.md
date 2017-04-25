@@ -1,3 +1,5 @@
+<a href="https://fly.io/slack/"><img src="https://fly.io/slack/badge.svg"></a>
+
 # Fly Heroku Buildpack
 
 Connects any Heroku app to Fly.io network.
